@@ -3,6 +3,7 @@
 import React from 'react';
 import {
 	BoldIcon,
+	ChevronDownIcon,
 	ItalicIcon,
 	ListTodoIcon,
 	LucideIcon,
@@ -17,6 +18,59 @@ import {
 import { cn } from '@/lib/utils';
 import { editorStore } from './store';
 import { Separator } from '@/components/ui/separator';
+
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
+interface Font {
+	label: string;
+	value: string;
+}
+
+const FontFamilyButton: React.FC = () => {
+	const fonts: Font[] = [
+		{ label: 'Arial', value: 'Arial' },
+		{ label: 'Times New Roman', value: 'Times New Roman' },
+		{ label: 'Courier New', value: 'Courier New' },
+		{ label: 'Georgia', value: 'Georgia' },
+		{ label: 'Verdana', value: 'Verdana' },
+	];
+
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<button className='flex h-7 w-[7.5rem] shrink-0 items-center justify-between overflow-hidden rounded-sm px-1.5 text-sm transition-colors hover:bg-neutral-200/80'>
+					<span className='truncate'>
+						{editorStore.editor?.getAttributes('textStyle').FontFamily || 'Arial'}
+					</span>
+					<ChevronDownIcon className='ml-2 size-4 shrink-0' />
+				</button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className='flex flex-col gap-y-1 p-1'>
+				{fonts.map(({ label, value }) => (
+					<DropdownMenuItem key={value} className='p-0'>
+						<button
+							className={cn(
+								'flex w-full items-center gap-x-2 rounded-sm px-2 py-1 transition-colors hover:bg-neutral-200/80',
+								{
+									'bg-neutral-200/80':
+										editorStore.editor?.getAttributes('textStyle').FontFamily === value,
+								},
+							)}
+							style={{ fontFamily: value }}
+							onClick={() => editorStore.editor?.chain().focus().setFontFamily(value).run()}>
+							<span className='text-sm'>{label}</span>
+						</button>
+					</DropdownMenuItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
+	);
+};
 
 interface ToolbarButtonProps {
 	onClick?: () => void;
@@ -97,18 +151,20 @@ export const Toolbar: React.FC = () => {
 
 	return (
 		<div className='bg-editor-toolbar-background w-editor-width mx-auto flex min-h-10 items-center gap-x-0.5 overflow-x-auto rounded-3xl px-2.5 py-0.5'>
-			{sections.map((section, index) => (
-				<ul key={index}>
-					<li className='flex'>
-						{section.map((item) => (
-							<ToolbarButton key={item.label} {...item} />
-						))}
-						{index !== sections.length - 1 && (
-							<Separator orientation='vertical' className='h-6 bg-neutral-300' />
-						)}
-					</li>
-				</ul>
+			{sections[0].map((section) => (
+				<ToolbarButton key={section.label} {...section} />
 			))}
+			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
+			<FontFamilyButton />
+			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
+			{sections[1].map((section) => (
+				<ToolbarButton key={section.label} {...section} />
+			))}
+			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
+			{sections[2].map((section) => (
+				<ToolbarButton key={section.label} {...section} />
+			))}
+			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 		</div>
 	);
 };

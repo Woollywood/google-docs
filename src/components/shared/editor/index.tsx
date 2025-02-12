@@ -12,6 +12,8 @@ import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
 import ImageResize from 'tiptap-extension-resize-image';
 import Underline from '@tiptap/extension-underline';
+import FontFamily from '@tiptap/extension-font-family';
+import TextStyle from '@tiptap/extension-text-style';
 import { editorStore } from './store';
 import { Toolbar } from './Toolbar';
 
@@ -38,24 +40,10 @@ export const Editor: React.FC = () => {
 			Image,
 			ImageResize,
 			Underline,
+			FontFamily,
+			TextStyle,
 		],
 		immediatelyRender: false,
-		content: `
-		<table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
-		`,
 		onCreate({ editor }) {
 			editorStore.editor = editor;
 		},
