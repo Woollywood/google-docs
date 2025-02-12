@@ -15,7 +15,8 @@ import Underline from '@tiptap/extension-underline';
 import FontFamily from '@tiptap/extension-font-family';
 import TextStyle from '@tiptap/extension-text-style';
 import { editorStore } from './store';
-import { Toolbar } from './Toolbar';
+import { Toolbar } from './toolbar';
+import { SectionsProvider } from './providers/SectionsProvider';
 
 export const Editor: React.FC = () => {
 	const editor = useEditor({
@@ -72,12 +73,14 @@ export const Editor: React.FC = () => {
 
 	return (
 		<div className='grid grid-rows-[auto_1fr]'>
-			<Toolbar />
-			<div className='bg-editor-background size-full overflow-x-auto px-4 print:overflow-visible print:bg-white print:p-0'>
-				<div className='mx-auto flex h-full min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0'>
-					<EditorContent editor={editor} />
+			<SectionsProvider>
+				<Toolbar />
+				<div className='bg-editor-background size-full overflow-x-auto px-4 print:overflow-visible print:bg-white print:p-0'>
+					<div className='mx-auto flex h-full min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0'>
+						<EditorContent editor={editor} />
+					</div>
 				</div>
-			</div>
+			</SectionsProvider>
 		</div>
 	);
 };
