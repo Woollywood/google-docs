@@ -14,6 +14,8 @@ import ImageResize from 'tiptap-extension-resize-image';
 import Underline from '@tiptap/extension-underline';
 import FontFamily from '@tiptap/extension-font-family';
 import TextStyle from '@tiptap/extension-text-style';
+import Highlight from '@tiptap/extension-highlight';
+import { Color } from '@tiptap/extension-color';
 import { editorStore } from './store';
 import { Toolbar } from './toolbar';
 import { SectionsProvider } from './providers/SectionsProvider';
@@ -43,6 +45,8 @@ export const Editor: React.FC = () => {
 			Underline,
 			FontFamily,
 			TextStyle,
+			Highlight.configure({ multicolor: true }),
+			Color,
 		],
 		immediatelyRender: false,
 		onCreate({ editor }) {
@@ -75,7 +79,7 @@ export const Editor: React.FC = () => {
 		<div className='grid grid-rows-[auto_1fr]'>
 			<SectionsProvider>
 				<Toolbar />
-				<div className='bg-editor-background size-full overflow-x-auto px-4 print:overflow-visible print:bg-white print:p-0'>
+				<div className='size-full overflow-x-auto bg-editor-background px-4 print:overflow-visible print:bg-white print:p-0'>
 					<div className='mx-auto flex h-full min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0'>
 						<EditorContent editor={editor} />
 					</div>
