@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { Editor } from './Editor';
+import { Editor } from '@/components/shared/editor';
 
 interface Props {
 	params: Promise<{ id: string }>;
@@ -8,11 +8,7 @@ interface Props {
 const Page: NextPage<Props> = async ({ params }) => {
 	const { id } = await params;
 
-	return (
-		<div>
-			<Editor />
-		</div>
-	);
+	return <Editor />;
 };
 
 export default Page;

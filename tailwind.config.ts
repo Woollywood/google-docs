@@ -67,6 +67,7 @@ export default {
 				editor: {
 					background: 'rgb(var(--editor-background))',
 					border: 'rgb(var(--editor-border))',
+					'toolbar-background': 'rgb(var(--editor-toolbar-background))',
 				},
 			},
 			borderRadius: {
@@ -94,6 +95,10 @@ export default {
 						height: '0',
 					},
 				},
+			},
+			spacing: {
+				'editor-width': 'var(--editor-width)',
+				'layout-gutter-y': 'var(--layout-gutter-y)',
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',

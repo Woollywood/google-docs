@@ -37,8 +37,15 @@
 		--sidebar-border: 227 230 234;
 		--sidebar-ring: 59 130 246;
 
+		--radius: 0.5rem;
+
 		--editor-background: 249 251 253;
 		--editor-border: 199 199 199;
+		--editor-toolbar-background: 241 244 249;
+
+		--editor-width: 52.25rem;
+
+		--layout-gutter-y: 1.5rem;
 	}
 
 	.dark {

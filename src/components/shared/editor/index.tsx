@@ -11,13 +11,16 @@ import TableHeader from '@tiptap/extension-table-header';
 import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
 import ImageResize from 'tiptap-extension-resize-image';
+import Underline from '@tiptap/extension-underline';
+import { editorStore } from './store';
+import { Toolbar } from './Toolbar';
 
 export const Editor: React.FC = () => {
 	const editor = useEditor({
 		editorProps: {
 			attributes: {
 				style: 'padding-left: 56px; padding-right: 56px',
-				class: 'focus:outline-none print:border-0 bg-white border border-editor-border flex flex-col min-h-screen w-[52.25rem] py-12',
+				class: 'focus:outline-none print:border-0 bg-white border border-editor-border flex flex-col h-full w-editor-width py-12',
 			},
 		},
 		extensions: [
@@ -34,6 +37,7 @@ export const Editor: React.FC = () => {
 			TableCell,
 			Image,
 			ImageResize,
+			Underline,
 		],
 		immediatelyRender: false,
 		content: `
@@ -52,12 +56,39 @@ export const Editor: React.FC = () => {
           </tbody>
         </table>
 		`,
+		onCreate({ editor }) {
+			editorStore.editor = editor;
+		},
+		onDestroy() {
+			editorStore.editor = null;
+		},
+		onUpdate({ editor }) {
+			editorStore.editor = editor;
+		},
+		onSelectionUpdate({ editor }) {
+			editorStore.editor = editor;
+		},
+		onTransaction({ editor }) {
+			editorStore.editor = editor;
+		},
+		onFocus({ editor }) {
+			editorStore.editor = editor;
+		},
+		onBlur({ editor }) {
+			editorStore.editor = editor;
+		},
+		onContentError({ editor }) {
+			editorStore.editor = editor;
+		},
 	});
 
 	return (
-		<div className='bg-editor-background size-full overflow-x-auto px-4 print:overflow-visible print:bg-white print:p-0'>
-			<div className='mx-auto flex min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0'>
-				<EditorContent editor={editor} />
+		<div className='grid grid-rows-[auto_1fr]'>
+			<Toolbar />
+			<div className='bg-editor-background size-full overflow-x-auto px-4 print:overflow-visible print:bg-white print:p-0'>
+				<div className='mx-auto flex h-full min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0'>
+					<EditorContent editor={editor} />
+				</div>
 			</div>
 		</div>
 	);
