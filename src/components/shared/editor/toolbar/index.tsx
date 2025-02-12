@@ -10,6 +10,7 @@ import { useSection } from '../providers/SectionsProvider';
 import { TextColorButton } from './TextColorButton';
 import { HighlightColorButton } from './HighlightColorButton';
 import { LinkButton } from './LinkButton';
+import { ImageButton } from './ImageButton';
 
 export const Toolbar: React.FC = observer(() => {
 	const sections = useSection();
@@ -31,6 +32,7 @@ export const Toolbar: React.FC = observer(() => {
 			<HighlightColorButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<LinkButton />
+			<ImageButton />
 			{sections[2].map((section) => (
 				<ToolbarButton key={section.label} {...section} />
 			))}
