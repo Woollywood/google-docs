@@ -252,4 +252,8 @@
 			outline: 3px solid var(--primary);
 		}
 	}
+
+	a {
+		@apply cursor-pointer text-blue-600 hover:underline;
+	}
 }

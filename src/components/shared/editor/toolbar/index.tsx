@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { useSection } from '../providers/SectionsProvider';
 import { TextColorButton } from './TextColorButton';
 import { HighlightColorButton } from './HighlightColorButton';
+import { LinkButton } from './LinkButton';
 
 export const Toolbar: React.FC = observer(() => {
 	const sections = useSection();
@@ -26,10 +27,10 @@ export const Toolbar: React.FC = observer(() => {
 			{sections[1].map((section) => (
 				<ToolbarButton key={section.label} {...section} />
 			))}
-			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<TextColorButton />
 			<HighlightColorButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
+			<LinkButton />
 			{sections[2].map((section) => (
 				<ToolbarButton key={section.label} {...section} />
 			))}

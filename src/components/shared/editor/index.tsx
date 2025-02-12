@@ -15,6 +15,7 @@ import Underline from '@tiptap/extension-underline';
 import FontFamily from '@tiptap/extension-font-family';
 import TextStyle from '@tiptap/extension-text-style';
 import Highlight from '@tiptap/extension-highlight';
+import Link from '@tiptap/extension-link';
 import { Color } from '@tiptap/extension-color';
 import { editorStore } from './store';
 import { Toolbar } from './toolbar';
@@ -47,6 +48,11 @@ export const Editor: React.FC = () => {
 			TextStyle,
 			Highlight.configure({ multicolor: true }),
 			Color,
+			Link.configure({
+				openOnClick: false,
+				autolink: true,
+				defaultProtocol: 'https',
+			}),
 		],
 		immediatelyRender: false,
 		onCreate({ editor }) {
