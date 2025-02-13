@@ -18,6 +18,7 @@ import Highlight from '@tiptap/extension-highlight';
 import Link from '@tiptap/extension-link';
 import TextAlign from '@tiptap/extension-text-align';
 import { FontSizeExtension } from './extensions/fontSize';
+import { LineHeightExtension } from './extensions/lineHeight';
 import { Color } from '@tiptap/extension-color';
 import { editorStore } from './store';
 import { Toolbar } from './toolbar';
@@ -59,6 +60,10 @@ export const Editor: React.FC = () => {
 				types: ['heading', 'paragraph'],
 			}),
 			FontSizeExtension,
+			LineHeightExtension.configure({
+				types: ['paragraph', 'heading'],
+				defaultLineHeight: 'normal',
+			}),
 		],
 		immediatelyRender: false,
 		onCreate({ editor }) {

@@ -14,6 +14,7 @@ import { ImageButton } from './ImageButton';
 import { AlignButton } from './AlignButton';
 import { ListButton } from './ListButton';
 import { FontSizeButton } from './FontSizeButton';
+import { LineHeightButton } from './LineHeightButton';
 
 export const Toolbar: React.FC = observer(() => {
 	const sections = useSection();
@@ -42,6 +43,7 @@ export const Toolbar: React.FC = observer(() => {
 			<LinkButton />
 			<ImageButton />
 			<AlignButton />
+			<LineHeightButton />
 			<ListButton />
 			{sections[2].map((section) => (
 				<ToolbarButton key={section.label} {...section} />
