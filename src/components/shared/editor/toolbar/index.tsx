@@ -12,6 +12,8 @@ import { HighlightColorButton } from './HighlightColorButton';
 import { LinkButton } from './LinkButton';
 import { ImageButton } from './ImageButton';
 import { AlignButton } from './AlignButton';
+import { ListButton } from './ListButton';
+import { FontSizeButton } from './FontSizeButton';
 
 export const Toolbar: React.FC = observer(() => {
 	const sections = useSection();
@@ -28,6 +30,7 @@ export const Toolbar: React.FC = observer(() => {
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<HeadingLevelButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
+			<FontSizeButton />
 			{sections[1].map(({ icon: Icon, ...props }) => (
 				<ToolbarButton key={props.label} {...props}>
 					<Icon className='size-4' />
@@ -39,6 +42,7 @@ export const Toolbar: React.FC = observer(() => {
 			<LinkButton />
 			<ImageButton />
 			<AlignButton />
+			<ListButton />
 			{sections[2].map((section) => (
 				<ToolbarButton key={section.label} {...section} />
 			))}
