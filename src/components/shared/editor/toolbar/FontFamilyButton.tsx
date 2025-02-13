@@ -29,7 +29,7 @@ export const FontFamilyButton: React.FC = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<ToolbarButton className='w-[7.5rem] justify-between'>
+				<ToolbarButton className='w-[7.5rem] justify-between px-1.5'>
 					<span className='truncate'>
 						{editorStore.editor?.getAttributes('textStyle').FontFamily || 'Arial'}
 					</span>
