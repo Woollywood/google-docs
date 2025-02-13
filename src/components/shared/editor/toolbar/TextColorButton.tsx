@@ -4,6 +4,7 @@ import React from 'react';
 import { editorStore } from '../store';
 import { type ColorResult, SketchPicker } from 'react-color';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { ToolbarButton } from './ToolbarButton';
 
 export const TextColorButton: React.FC = () => {
 	const value = editorStore.editor?.getAttributes('textStyle').color || '#000000';
@@ -15,10 +16,10 @@ export const TextColorButton: React.FC = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<button className='flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm transition-colors hover:bg-neutral-200/80'>
+				<ToolbarButton className='flex-col px-1.5'>
 					<span className='text-xs'>A</span>
 					<div className='h-0.5 w-full' style={{ backgroundColor: value }} />
-				</button>
+				</ToolbarButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='p-0'>
 				<SketchPicker color={value} onChange={onChange} />

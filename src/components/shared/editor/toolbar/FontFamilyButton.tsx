@@ -10,6 +10,7 @@ import {
 import { ChevronDownIcon } from 'lucide-react';
 import { editorStore } from '../store';
 import { cn } from '@/lib/utils';
+import { ToolbarButton } from './ToolbarButton';
 
 interface Font {
 	label: string;
@@ -28,12 +29,12 @@ export const FontFamilyButton: React.FC = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<button className='flex h-7 w-[7.5rem] shrink-0 items-center justify-between overflow-hidden rounded-sm px-1.5 text-sm transition-colors hover:bg-neutral-200/80'>
+				<ToolbarButton className='w-[7.5rem] justify-between'>
 					<span className='truncate'>
 						{editorStore.editor?.getAttributes('textStyle').FontFamily || 'Arial'}
 					</span>
 					<ChevronDownIcon className='ml-2 size-4 shrink-0' />
-				</button>
+				</ToolbarButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='flex flex-col gap-y-1 p-1'>
 				{fonts.map(({ label, value }) => (

@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/compon
 import { Link2Icon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ToolbarButton } from './ToolbarButton';
 
 export const LinkButton: React.FC = () => {
 	const [value, setValue] = useState<string>(editorStore.editor?.getAttributes('link').href || '');
@@ -18,9 +19,9 @@ export const LinkButton: React.FC = () => {
 	return (
 		<DropdownMenu onOpenChange={(open) => open && setValue(editorStore.editor?.getAttributes('link').href || '')}>
 			<DropdownMenuTrigger asChild>
-				<button className='flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm transition-colors hover:bg-neutral-200/80'>
+				<ToolbarButton>
 					<Link2Icon className='size-4' />
-				</button>
+				</ToolbarButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='flex items-center gap-x-2 p-2.5'>
 				<Input placeholder='https://example.com' value={value} onChange={(e) => setValue(e.target.value)} />

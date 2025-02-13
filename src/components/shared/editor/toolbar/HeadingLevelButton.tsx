@@ -11,6 +11,7 @@ import type { Level } from '@tiptap/extension-heading';
 import { editorStore } from '../store';
 import { ChevronDownIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ToolbarButton } from './ToolbarButton';
 
 interface Heading {
 	label: string;
@@ -65,10 +66,10 @@ export const HeadingLevelButton = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<button className='flex h-7 min-w-7 shrink-0 items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm transition-colors hover:bg-neutral-200/80'>
+				<ToolbarButton className='min-w-7 justify-center px-1.5'>
 					<span className='truncate'>{getCurrentHeading()}</span>
 					<ChevronDownIcon className='ml-2 size-4 shrink-0' />
-				</button>
+				</ToolbarButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='flex flex-col gap-y-1 p-1'>
 				{headings.map(({ label, value, fontSize }) => (

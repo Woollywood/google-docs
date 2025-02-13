@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { ImageIcon, SearchIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { ToolbarButton } from './ToolbarButton';
 
 export const ImageButton: React.FC = () => {
 	const [imageUrl, setImageUrl] = useState<string>(editorStore.editor?.getAttributes('link').href || '');
@@ -54,9 +55,9 @@ export const ImageButton: React.FC = () => {
 			<DropdownMenu
 				onOpenChange={(open) => open && setImageUrl(editorStore.editor?.getAttributes('link').href || '')}>
 				<DropdownMenuTrigger asChild>
-					<button className='flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm transition-colors hover:bg-neutral-200/80'>
+					<ToolbarButton>
 						<ImageIcon className='size-4' />
-					</button>
+					</ToolbarButton>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent>
 					<DropdownMenuItem onClick={onUpload}>

@@ -5,6 +5,7 @@ import { editorStore } from '../store';
 import { type ColorResult, SketchPicker } from 'react-color';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { HighlighterIcon } from 'lucide-react';
+import { ToolbarButton } from './ToolbarButton';
 
 export const HighlightColorButton: React.FC = () => {
 	const value = editorStore.editor?.getAttributes('highlight').color || '#ffffff';
@@ -16,9 +17,9 @@ export const HighlightColorButton: React.FC = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<button className='flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm transition-colors hover:bg-neutral-200/80'>
+				<ToolbarButton className='px-1.5'>
 					<HighlighterIcon className='size-4' />
-				</button>
+				</ToolbarButton>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='p-0'>
 				<SketchPicker color={value} onChange={onChange} />

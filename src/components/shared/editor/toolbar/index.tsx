@@ -18,16 +18,20 @@ export const Toolbar: React.FC = observer(() => {
 
 	return (
 		<div className='mx-auto flex min-h-10 w-editor-width items-center gap-x-0.5 overflow-x-auto rounded-3xl bg-editor-toolbar-background px-2.5 py-0.5'>
-			{sections[0].map((section) => (
-				<ToolbarButton key={section.label} {...section} />
+			{sections[0].map(({ icon: Icon, ...props }) => (
+				<ToolbarButton key={props.label} {...props}>
+					<Icon className='size-4' />
+				</ToolbarButton>
 			))}
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<FontFamilyButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
 			<HeadingLevelButton />
 			<Separator orientation='vertical' className='h-6 bg-neutral-300' />
-			{sections[1].map((section) => (
-				<ToolbarButton key={section.label} {...section} />
+			{sections[1].map(({ icon: Icon, ...props }) => (
+				<ToolbarButton key={props.label} {...props}>
+					<Icon className='size-4' />
+				</ToolbarButton>
 			))}
 			<TextColorButton />
 			<HighlightColorButton />
