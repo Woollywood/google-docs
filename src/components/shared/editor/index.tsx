@@ -20,9 +20,11 @@ import TextAlign from '@tiptap/extension-text-align';
 import { FontSizeExtension } from './extensions/fontSize';
 import { LineHeightExtension } from './extensions/lineHeight';
 import { Color } from '@tiptap/extension-color';
+import { useIsClient } from '@uidotdev/usehooks';
 import { editorStore } from './store';
 import { Toolbar } from './toolbar';
 import { SectionsProvider } from './providers/SectionsProvider';
+import { Ruler } from './Ruler';
 
 export const Editor: React.FC = () => {
 	const editor = useEditor({
@@ -92,11 +94,18 @@ export const Editor: React.FC = () => {
 		},
 	});
 
+	const isClient = useIsClient();
+
+	if (!isClient) {
+		return null;
+	}
+
 	return (
 		<div className='grid grid-rows-[auto_1fr]'>
 			<SectionsProvider>
 				<Toolbar />
-				<div className='size-full overflow-x-auto bg-editor-background px-4 print:overflow-visible print:bg-white print:p-0'>
+				<div className='grid size-full grid-rows-[auto_1fr] overflow-x-auto bg-editor-background px-4 print:overflow-visible print:bg-white print:p-0'>
+					<Ruler />
 					<div className='mx-auto flex h-full min-w-max justify-center py-4 print:w-full print:min-w-0 print:py-0'>
 						<EditorContent editor={editor} />
 					</div>
