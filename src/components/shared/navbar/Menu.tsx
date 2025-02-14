@@ -31,8 +31,50 @@ import {
 	MenubarSubTrigger,
 	MenubarTrigger,
 } from '@/components/ui/menubar';
+import { editorStore } from '../editor/store';
 
 export const Menu: React.FC = () => {
+	const insertTable = ({ rows, cols }: { rows: number; cols: number }) =>
+		editorStore.editor?.chain().focus().insertTable({ rows, cols, withHeaderRow: false }).run();
+
+	const onDownload = (blob: Blob, filename: string) => {
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = filename;
+		a.click();
+	};
+
+	const onSaveJSON = () => {
+		if (!editorStore.editor) {
+			return;
+		}
+
+		const content = editorStore.editor?.getJSON();
+		const blob = new Blob([JSON.stringify(content)], { type: 'application/json' });
+		onDownload(blob, `document.json`);
+	};
+
+	const onSaveHTML = () => {
+		if (!editorStore.editor) {
+			return;
+		}
+
+		const content = editorStore.editor?.getHTML();
+		const blob = new Blob([content!], { type: 'text/html' });
+		onDownload(blob, `document.html`);
+	};
+
+	const onSaveText = () => {
+		if (!editorStore.editor) {
+			return;
+		}
+
+		const content = editorStore.editor?.getText();
+		const blob = new Blob([content!], { type: 'text/plain' });
+		onDownload(blob, `document.txt`);
+	};
+
 	return (
 		<Menubar className='h-auto border-none bg-transparent p-0 shadow-none'>
 			<MenubarMenu>
@@ -46,19 +88,19 @@ export const Menu: React.FC = () => {
 							Save
 						</MenubarSubTrigger>
 						<MenubarSubContent>
-							<MenubarItem>
+							<MenubarItem onClick={onSaveJSON}>
 								<FileJsonIcon className='mr-2 size-4' />
 								JSON
 							</MenubarItem>
-							<MenubarItem>
+							<MenubarItem onClick={onSaveHTML}>
 								<GlobeIcon className='mr-2 size-4' />
 								HTML
 							</MenubarItem>
-							<MenubarItem>
+							<MenubarItem onClick={() => window.print()}>
 								<BsFilePdf className='mr-2 size-4' />
 								PDF
 							</MenubarItem>
-							<MenubarItem>
+							<MenubarItem onClick={onSaveText}>
 								<FileTextIcon className='mr-2 size-4' />
 								Text
 							</MenubarItem>
@@ -89,11 +131,11 @@ export const Menu: React.FC = () => {
 					Edit
 				</MenubarTrigger>
 				<MenubarContent>
-					<MenubarItem>
+					<MenubarItem onClick={() => editorStore.editor?.chain().focus().undo().run()}>
 						<Undo2Icon className='mr-2 size-4' />
 						Undo
 					</MenubarItem>
-					<MenubarItem>
+					<MenubarItem onClick={() => editorStore.editor?.chain().focus().redo().run()}>
 						<Redo2Icon className='mr-2 size-4' />
 						Redo
 					</MenubarItem>
@@ -107,10 +149,10 @@ export const Menu: React.FC = () => {
 					<MenubarSub>
 						<MenubarSubTrigger>Table</MenubarSubTrigger>
 						<MenubarSubContent>
-							<MenubarItem>1 x 1</MenubarItem>
-							<MenubarItem>2 x 2</MenubarItem>
-							<MenubarItem>3 x 3</MenubarItem>
-							<MenubarItem>4 x 4</MenubarItem>
+							<MenubarItem onClick={() => insertTable({ rows: 1, cols: 1 })}>1 x 1</MenubarItem>
+							<MenubarItem onClick={() => insertTable({ rows: 2, cols: 2 })}>2 x 2</MenubarItem>
+							<MenubarItem onClick={() => insertTable({ rows: 3, cols: 3 })}>3 x 3</MenubarItem>
+							<MenubarItem onClick={() => insertTable({ rows: 4, cols: 4 })}>4 x 4</MenubarItem>
 						</MenubarSubContent>
 					</MenubarSub>
 				</MenubarContent>
@@ -126,25 +168,25 @@ export const Menu: React.FC = () => {
 							Text
 						</MenubarSubTrigger>
 						<MenubarSubContent>
-							<MenubarItem>
+							<MenubarItem onClick={() => editorStore.editor?.chain().toggleBold().run()}>
 								<BoldIcon className='mr-2 size-4' />
 								Bold
 							</MenubarItem>
-							<MenubarItem>
+							<MenubarItem onClick={() => editorStore.editor?.chain().toggleItalic().run()}>
 								<ItalicIcon className='mr-2 size-4' />
 								Italic
 							</MenubarItem>
-							<MenubarItem>
+							<MenubarItem onClick={() => editorStore.editor?.chain().toggleUnderline().run()}>
 								<UnderlineIcon className='mr-2 size-4' />
 								Underline
 							</MenubarItem>
-							<MenubarItem>
+							<MenubarItem onClick={() => editorStore.editor?.chain().toggleStrike().run()}>
 								<StrikethroughIcon className='mr-2 size-4' />
 								Strikethrough
 							</MenubarItem>
 						</MenubarSubContent>
 					</MenubarSub>
-					<MenubarItem>
+					<MenubarItem onClick={() => editorStore.editor?.chain().unsetAllMarks().run()}>
 						<RemoveFormattingIcon className='mr-2 size-4' />
 						Clear formatting
 					</MenubarItem>
