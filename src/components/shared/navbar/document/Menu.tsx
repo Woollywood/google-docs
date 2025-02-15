@@ -31,7 +31,7 @@ import {
 	MenubarSubTrigger,
 	MenubarTrigger,
 } from '@/components/ui/menubar';
-import { editorStore } from '../editor/store';
+import { editorStore } from '@/components/shared/editor/store';
 
 export const Menu: React.FC = () => {
 	const insertTable = ({ rows, cols }: { rows: number; cols: number }) =>

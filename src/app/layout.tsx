@@ -1,15 +1,13 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 
-const geistSans = Geist({
-	variable: '--font-primary',
-	subsets: ['latin'],
-});
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
-const geistMono = Geist_Mono({
-	variable: '--font-secondary',
+import './globals.css';
+
+const inter = Inter({
+	variable: '--font-primary',
 	subsets: ['latin'],
 });
 
@@ -25,8 +23,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={cn(geistSans.variable, geistMono.variable, 'antialiased')}>
-				<div className='py-layout-gutter-y container grid min-h-screen'>{children}</div>
+			<body className={cn(inter.variable, 'antialiased')}>
+				<div className='container grid min-h-screen py-layout-gutter-y'>
+					<NuqsAdapter>{children}</NuqsAdapter>
+				</div>
 			</body>
 		</html>
 	);

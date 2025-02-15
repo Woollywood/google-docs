@@ -99,6 +99,7 @@ export default {
 			spacing: {
 				'editor-width': 'var(--editor-width)',
 				'layout-gutter-y': 'var(--layout-gutter-y)',
+				'root-navbar-height': 'var(--root-navbar-height)',
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',

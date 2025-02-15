@@ -46,6 +46,8 @@
 		--editor-width: 52.25rem;
 
 		--layout-gutter-y: 1.5rem;
+
+		--root-navbar-height: 4rem;
 	}
 
 	.dark {

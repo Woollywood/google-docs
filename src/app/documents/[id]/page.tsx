@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { Editor } from '@/components/shared/editor';
-import { Navbar } from '@/components/shared/navbar';
+import { Navbar } from '@/components/shared/navbar/document';
 
 interface Props {
 	params: Promise<{ id: string }>;
