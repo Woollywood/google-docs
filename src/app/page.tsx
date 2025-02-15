@@ -1,5 +1,5 @@
 import { Navbar } from '@/components/shared/navbar/root';
-import { Button } from '@/components/ui/button';
+import { TemplatesGallery } from '@/components/shared/TemplatesGallery';
 import { NextPage } from 'next';
 
 const Page: NextPage = () => {
@@ -9,7 +9,7 @@ const Page: NextPage = () => {
 				<Navbar />
 			</div>
 			<div className='pt-root-navbar-height'>
-				<Button>Press me</Button>
+				<TemplatesGallery />
 			</div>
 		</div>
 	);
