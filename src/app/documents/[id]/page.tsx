@@ -8,6 +8,7 @@ interface Props {
 
 const Page: NextPage<Props> = async ({ params }) => {
 	const { id } = await params;
+	console.log(id);
 
 	return (
 		<div className='grid h-full grid-rows-[auto_1fr] gap-y-8'>
