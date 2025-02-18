@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SearchInput } from './SearchInput';
@@ -12,7 +12,9 @@ export const Navbar: React.FC = () => {
 				</Link>
 				<h3 className='text-xl'>Docs</h3>
 			</div>
-			<SearchInput />
+			<Suspense>
+				<SearchInput />
+			</Suspense>
 			<div />
 		</div>
 	);
