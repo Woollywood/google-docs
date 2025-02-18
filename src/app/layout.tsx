@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { cn } from '@/lib/utils';
-
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { ClerkProvider } from '@clerk/nextjs';
+import { cn } from '@/lib/utils';
 
 import './globals.css';
 
@@ -22,12 +22,14 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
-			<body className={cn(inter.variable, 'antialiased')}>
-				<div className='container grid min-h-screen py-layout-gutter-y'>
-					<NuqsAdapter>{children}</NuqsAdapter>
-				</div>
-			</body>
-		</html>
+		<ClerkProvider>
+			<html lang='en'>
+				<body className={cn(inter.variable, 'antialiased')}>
+					<div className='container grid min-h-screen py-layout-gutter-y'>
+						<NuqsAdapter>{children}</NuqsAdapter>
+					</div>
+				</body>
+			</html>
+		</ClerkProvider>
 	);
 }
