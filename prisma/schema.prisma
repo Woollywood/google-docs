@@ -13,6 +13,14 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model User {
+    id              String  @id @default(cuid())
+    email_addresses String  @unique
+    first_name      String?
+    last_name       String?
+    image_url       String?
+}
+
 model Document {
     id             String  @id @default(cuid())
     content        String?
