@@ -1,15 +1,13 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+import { Inter } from 'next/font/google';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { ClerkProvider } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
 
-const geistSans = Geist({
-	variable: '--font-primary',
-	subsets: ['latin'],
-});
+import './globals.css';
 
-const geistMono = Geist_Mono({
-	variable: '--font-secondary',
+const inter = Inter({
+	variable: '--font-primary',
 	subsets: ['latin'],
 });
 
@@ -24,10 +22,14 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
-			<body className={cn(geistSans.variable, geistMono.variable, 'antialiased')}>
-				<div>{children}</div>
-			</body>
-		</html>
+		<ClerkProvider>
+			<html lang='en'>
+				<body className={cn(inter.variable, 'antialiased')}>
+					<div className='container grid min-h-screen py-layout-gutter-y'>
+						<NuqsAdapter>{children}</NuqsAdapter>
+					</div>
+				</body>
+			</html>
+		</ClerkProvider>
 	);
 }
