@@ -50,12 +50,26 @@ export async function POST(req: Request) {
 	// For this guide, log payload to console
 	const eventType = evt.type;
 	switch (eventType) {
-		case 'user.created':
+		case 'user.created': {
 			const { id, email_addresses, first_name, last_name, image_url } = evt.data;
 			await prisma.user.create({
 				data: { id, email_addresses: email_addresses[0].email_address, first_name, last_name, image_url },
 			});
 			break;
+		}
+		case 'user.updated': {
+			const { id, email_addresses, first_name, last_name, image_url } = evt.data;
+			await prisma.user.update({
+				where: { id },
+				data: { email_addresses: email_addresses[0].email_address, first_name, last_name, image_url },
+			});
+			break;
+		}
+		case 'user.deleted': {
+			const { id } = evt.data;
+			await prisma.user.delete({ where: { id } });
+			break;
+		}
 		default:
 			break;
 	}
