@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 250 251 253;
+		--foreground: 9 9 10;
+		--card: 255 255 255;
+		--card-foreground: 9 9 10;
+		--popover: 255 255 255;
+		--popover-foreground: 9 9 10;
+		--primary: 23 23 26;
+		--primary-foreground: 250 250 250;
+		--secondary: 244 244 245;
+		--secondary-foreground: 23 23 26;
+		--muted: 244 244 245;
+		--muted-foreground: 112 112 117;
+		--accent: 244 244 245;
+		--accent-foreground: 23 23 26;
+		--destructive: 239 68 68;
+		--destructive-foreground: 250 250 250;
+		--border: 227 227 227;
+		--input: 227 227 227;
+		--ring: 9 9 10;
+		--chart-1: 245 117 87;
+		--chart-2: 47 169 144;
+		--chart-3: 38 68 83;
+		--chart-4: 234 196 98;
+		--chart-5: 247 169 94;
+		--sidebar-background: 250 250 250;
+		--sidebar-foreground: 62 62 66;
+		--sidebar-primary: 23 23 26;
+		--sidebar-primary-foreground: 250 250 250;
+		--sidebar-accent: 244 244 245;
+		--sidebar-accent-foreground: 23 23 26;
+		--sidebar-border: 227 230 234;
+		--sidebar-ring: 59 130 246;
+
+		--radius: 0.5rem;
+
+		--editor-background: 249 251 253;
+		--editor-border: 199 199 199;
+		--editor-toolbar-background: 241 244 249;
+
+		--editor-width: 52.25rem;
+
+		--layout-gutter-y: 1.5rem;
+
+		--root-navbar-height: 4rem;
+	}
+
+	.dark {
+		--background: 9 9 10;
+		--foreground: 250 250 250;
+		--card: 9 9 10;
+		--card-foreground: 250 250 250;
+		--popover: 9 9 10;
+		--popover-foreground: 250 250 250;
+		--primary: 250 250 250;
+		--primary-foreground: 23 23 26;
+		--secondary: 38 38 41;
+		--secondary-foreground: 250 250 250;
+		--muted: 38 38 41;
+		--muted-foreground: 161 161 166;
+		--accent: 38 38 41;
+		--accent-foreground: 250 250 250;
+		--destructive: 127 29 29;
+		--destructive-foreground: 250 250 250;
+		--border: 38 38 41;
+		--input: 38 38 41;
+		--ring: 212 212 216;
+		--chart-1: 51 122 255;
+		--chart-2: 46 179 140;
+		--chart-3: 255 165 51;
+		--chart-4: 178 102 255;
+		--chart-5: 255 77 128;
+		--sidebar-background: 23 23 26;
+		--sidebar-foreground: 244 244 245;
+		--sidebar-primary: 59 130 246;
+		--sidebar-primary-foreground: 255 255 255;
+		--sidebar-accent: 38 38 41;
+		--sidebar-accent-foreground: 244 244 245;
+		--sidebar-border: 38 38 41;
+		--sidebar-ring: 59 130 246;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply overflow-x-hidden bg-background font-primary text-foreground;
+	}
+}
+
+.tiptap {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		line-height: 1.1;
+		margin-top: 2.5rem;
+		text-wrap: pretty;
+	}
+
+	h1,
+	h2 {
+		margin-top: 3.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	h1 {
+		font-size: 1.4rem;
+	}
+
+	h2 {
+		font-size: 1.2rem;
+	}
+
+	h3 {
+		font-size: 1.1rem;
+	}
+
+	h4,
+	h5,
+	h6 {
+		font-size: 1rem;
+	}
+
+	ul,
+	ol {
+		padding: 0 1rem;
+		margin: 1.25rem 1rem 1.25rem 0.4rem;
+	}
+
+	ul li {
+		list-style-type: disc;
+
+		p {
+			margin-top: 0.25em;
+			margin-bottom: 0.25em;
+		}
+	}
+
+	ol li {
+		list-style-type: decimal;
+
+		p {
+			margin-top: 0.25em;
+			margin-bottom: 0.25em;
+		}
+	}
+
+	ul[data-type='taskList'] {
+		list-style: none;
+		margin-left: 0;
+		padding: 0;
+
+		li {
+			align-items: flex-start;
+			display: flex;
+
+			> label {
+				flex: 0 0 auto;
+				margin-right: 0.5rem;
+				user-select: none;
+			}
+
+			> div {
+				flex: 1 1 auto;
+			}
+		}
+
+		input[type='checkbox'] {
+			cursor: pointer;
+		}
+
+		ul[data-type='taskList'] {
+			margin: 0;
+		}
+	}
+
+	table {
+		border-collapse: collapse;
+		margin: 0;
+		overflow: hidden;
+		table-layout: fixed;
+		width: 100%;
+
+		td,
+		th {
+			border: 1px solid black;
+			box-sizing: border-box;
+			min-width: 1em;
+			padding: 6px 8px;
+			position: relative;
+			vertical-align: top;
+
+			> * {
+				margin-bottom: 0;
+			}
+		}
+
+		th {
+			background-color: var(--editor-border);
+			font-weight: bold;
+			text-align: left;
+		}
+
+		.selectedCell:after {
+			background: var(--editor-border);
+			content: '';
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			pointer-events: none;
+			position: absolute;
+			z-index: 2;
+		}
+
+		.column-resize-handle {
+			background-color: var(--primary);
+			bottom: -2px;
+			pointer-events: none;
+			position: absolute;
+			right: -2px;
+			top: 0;
+			width: 4px;
+		}
+	}
+
+	.tableWrapper {
+		margin: 1.5rem 0;
+		overflow-x: auto;
+	}
+
+	&.resize-cursor {
+		cursor: ew-resize;
+		cursor: col-resize;
+	}
+
+	img {
+		display: block;
+		height: auto;
+		margin: 1.5rem 0;
+		max-width: 100%;
+
+		&.ProseMirror-selectednode {
+			outline: 3px solid var(--primary);
+		}
+	}
+
+	a {
+		@apply cursor-pointer text-blue-600 hover:underline;
+	}
+}
